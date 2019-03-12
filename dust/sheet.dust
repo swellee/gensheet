@@ -1,0 +1,24 @@
+//所有原始数据
+let _data = {json|s};
+
+{#sheets}
+class {.classname} {~lb}
+    constructor(d) {~lb}
+    this.cfg = d;
+    {~rb}
+{#.fileds}
+    // {.comments|s}
+    get {.name|s}(){~lb} return this.cfg.{.name|s}; {~rb}
+{/.fileds}
+{#._consts}
+    static get {.k}() {~lb} return {.v} {~rb};
+{/._consts}
+    static Get(id){~lb} return id in _data.{.sheetname} ? new {.classname}(_data.{.sheetname}[id]) : null; {~rb}
+{~rb}
+{/sheets}
+
+{#sheets}exports.{.sheetname}s = Object.values(_data.{.sheetname});
+{/sheets}
+
+{#sheets}exports.{.classname} = {.classname};
+{/sheets}

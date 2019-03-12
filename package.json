@@ -1,0 +1,25 @@
+{
+  "name": "gensheet",
+  "version": "1.0.0",
+  "description": "xlsx generator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@116.62.100.239:swellee/gensheet.git"
+  },
+  "keywords": [
+    "xlsx",
+    "generator"
+  ],
+  "author": "swellee",
+  "license": "ISC",
+  "dependencies": {
+    "dustjs-linkedin": "^2.7.5",
+    "mkdir-p": "^0.0.7",
+    "node-xlsx": "^0.14.1"
+  }
+}
