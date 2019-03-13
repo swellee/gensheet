@@ -110,12 +110,13 @@ async function gen(cfgKey, cfgNode) {
         // 客户端按sheet拆分
         let clientDatas = parsedData.client.jsondata;
         let outdirC = path.dirname(outFileC);
-        await dust.gen('sheet', ...Object.keys(clientDatas).map(key => {
+        let fileExt = path.extname(outFileC);
+        await dust.gen(cfgNode.tplName, ...Object.keys(clientDatas).map(key => {
             let dt = clientDatas[key];
             let jsondata = {[key]: dt};
             return {
                 data: {sheets: parsedData.client.sheets.filter(s => s.sheetname == key), jsondata, json: JSON.stringify(jsondata) },
-                outfile: path.join(outdirC, `client_${key}.js`)
+                outfile: path.join(outdirC, `client_${key}.${fileExt}`)
             };
         }))
         
@@ -182,21 +183,22 @@ async function gen(cfgKey, cfgNode) {
         }
 
         let outdirC = path.dirname(outFileC);
+        let fileExt = path.extname(outFileC);
         let gens = chunks.map((c, idx) => {
-            let chunkFile = path.join(outdirC, `data${idx}.js`);
+            let chunkFile = path.join(outdirC, `data${idx}.${fileExt}`);
 
             return {data: {json: JSON.stringify(c)}, outfile: chunkFile}
         });
-        await dust.gen('sheetdata', ...gens);
-        await dust.gen('sheetdeclare', {
+        await dust.gen(cfgNode.chunkTplNames[1], ...gens);
+        await dust.gen(cfgNode.chunkTplNames[0], {
             data: {sheets: parsedData.client.sheets, chunks, chunkCnt: chunks.length},
             outfile: outFileC
         });
-        await dust.gen('sheet', {data: parsedData.server, outfile: outFileS});
+        await dust.gen(cfgNode.tplName, {data: parsedData.server, outfile: outFileS});
     }
     else {
         //不切分，正常写入
-        await dust.gen('sheet',
+        await dust.gen(cfgNode.tplName,
             {data: parsedData.client, outfile: outFileC},
             {data: parsedData.server, outfile: outFileS});
     }
