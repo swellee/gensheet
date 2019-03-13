@@ -116,7 +116,7 @@ async function gen(cfgKey, cfgNode) {
             let jsondata = {[key]: dt};
             return {
                 data: {sheets: parsedData.client.sheets.filter(s => s.sheetname == key), jsondata, json: JSON.stringify(jsondata) },
-                outfile: path.join(outdirC, `client_${key}.${fileExt}`)
+                outfile: path.join(outdirC, `client_${key}${fileExt}`)
             };
         }))
         
@@ -185,7 +185,7 @@ async function gen(cfgKey, cfgNode) {
         let outdirC = path.dirname(outFileC);
         let fileExt = path.extname(outFileC);
         let gens = chunks.map((c, idx) => {
-            let chunkFile = path.join(outdirC, `data${idx}.${fileExt}`);
+            let chunkFile = path.join(outdirC, `data${idx}${fileExt}`);
 
             return {data: {json: JSON.stringify(c)}, outfile: chunkFile}
         });
