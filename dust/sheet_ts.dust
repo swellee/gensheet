@@ -1,20 +1,20 @@
-//所有原始数据
+// 所有原始数据
+// tslint:disable-next-line
 const _data = {json|s};
 
 {#sheets}
 export class {.classname} {~lb}
-    cfg:any;
-    constructor(d:any) {~lb}
+    public cfg: any;
+    constructor(d: any) {~lb}
         this.cfg = d;
     {~rb}
 {#.fileds}
     // {.comments|s}
-    get {.name|s}(){~lb} return this.cfg.{.name|s}; {~rb}
+    get {.name|s}() {~lb} return this.cfg.{.name|s}; {~rb}
 {/.fileds}
 {#._consts}
     static get {.k}() {~lb} return {.v} {~rb};
 {/._consts}
-    static Get(id:string | number){~lb} return id in _data.{.sheetname} ? new {.classname}(_data.{.sheetname}[id]) : null; {~rb}
+    public static Get(id: string | number) {~lb} return id in _data.{.sheetname} ? new {.classname}(_data.{.sheetname}[id]) : undefined; {~rb}
 {~rb}
 {/sheets}
-

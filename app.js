@@ -116,7 +116,7 @@ async function gen(cfgKey, cfgNode) {
             let jsondata = {[key]: dt};
             return {
                 data: {sheets: parsedData.client.sheets.filter(s => s.sheetname == key), jsondata, json: JSON.stringify(jsondata) },
-                outfile: path.join(outdirC, `client_${key}${fileExt}`)
+                outfile: path.join(outdirC, `client_${key.toLowerCase()}${fileExt}`)
             };
         }))
         

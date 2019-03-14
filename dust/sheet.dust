@@ -1,7 +1,9 @@
-//所有原始数据
+// 所有原始数据
+// tslint:disable-next-line
 let _data = {json|s};
 
 {#sheets}
+// tslint:disable-next-line
 class {.classname} {~lb}
     constructor(d) {~lb}
     this.cfg = d;
